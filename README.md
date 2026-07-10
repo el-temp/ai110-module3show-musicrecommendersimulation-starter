@@ -29,6 +29,16 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+## Response:
+To recomend songs the system will use genre, mood, energy, and accousticness.
+
+The user profile stores information for favorite genre, favorite mood, target energy, and a boolean for if they like accoustics which can be used as a benchmark for recomendation.
+
+For the text comparison like mood and energy points will be added if they match. Since accousticness is only stored as a boolean if that is set to true then the accoustincess will simply be added and if it is false it won't be added at all or maybe even subtracted. For energy point will be calculated as adding 1 -|energy-target energy|.
+
+Songs that score higher points will be recomended first.
+
+This system may result in too much bias being focused on genre and mood(could potentially be remedied by having user rank which metric they value more )
 ---
 
 ## Getting Started
