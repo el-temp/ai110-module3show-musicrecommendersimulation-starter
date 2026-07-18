@@ -3,9 +3,9 @@
 ## 1. Model Name  
 
 Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
 
----
+
+Name: MusicMatcher-alpha
 
 ## 2. Intended Use  
 
