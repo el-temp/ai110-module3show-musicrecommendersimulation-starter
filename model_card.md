@@ -17,7 +17,7 @@ Prompts:
 - What assumptions does it make about the user  
 - Is this for real users or classroom exploration  
 
----
+This recomender provides the top 5 songs in the playlist reprsented by songs.csv. This recomnder assumes mood and genre should be weighted more in preference selection. This recomnder is more for a classroom exploration than for real user experience given it's limitied representation of genres to match and inability for user to implement their own profile. 
 
 ## 3. How the Model Works  
 
@@ -32,8 +32,7 @@ Prompts:
 
 Avoid code here. Pretend you are explaining the idea to a friend who does not program.
 
----
-
+Songs are scored by giving 2 points for a genre or mood macth, 1 point for accoustisic preference match, and up to one point depending if the energy of the song is an exact match to the desried enegery represented by a numerical value between 0 and 1. These points are added together and the top 5 highest scoring songs are recomended with their point breakdown. I created addition user prfoiles to test for edge cases but most of the core logic for recomendation was not pre built.
 ## 4. Data  
 
 Describe the dataset the model uses.  
@@ -45,7 +44,7 @@ Prompts:
 - Did you add or remove data  
 - Are there parts of musical taste missing in the dataset  
 
----
+The are 17 songs in the catelouge each having id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness. The genres represented are  pop, lofi, rock, ambient, jazz, synthwave, indie pop, classical, metal, house, r&b, folk, hip hop, dream pop. The moods represented are happy, chill, intense, relaxed, moody, focused, nostalgic, angry, euphoric, romantic, melancholic, playful, dreamy. 7 songs in the daatset were added by me for more variety. There are infinite genres and moods that could be applied for this recomender but thse songs act as a reasonable sample to include.
 
 ## 5. Strengths  
 
@@ -57,7 +56,7 @@ Prompts:
 - Any patterns you think your scoring captures correctly  
 - Cases where the recommendations matched your intuition  
 
----
+The data works well as a basic recomnder. Common profiles like pop with high energy will get apportiate recomndations. Generally users will probably want genre to have higher pritoity when sorting since genre is the most common classification of songs so the prefernce calculation giving more weight to that matches the intuition. 
 
 ## 6. Limitations and Bias 
 
@@ -70,7 +69,7 @@ Prompts:
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
 
----
+The biggest issue with is recomnder is its simplicity. Almost every song in the dataset has a unique genre so it gives an unrealsitc equal weight to evrything and only allows songs to be categorized as one genre which is not always true. Additionally there is no way to change the weighting of the preferences a genre or mood match is always plus 2 points compared to the maximum 1 point from the other 2 characteristics. This favors users for consider the most important aspect of song genre or mood, and negelcts users who really want accoustics in song. 
 
 ## 7. Evaluation  
 
@@ -85,7 +84,7 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
----
+Multiple profiels were tested. One of the edge cases profiles were `{'favorite_genre': 'pop', 'favorite_mood': 'sad', 'target_energy': 0.9, 'likes_acoustic': False}`. This profile tested for strange profile that has contradictory genre and mood where the mood is not representative in the dataset. I was looking to see how preferences would change when a preferenc eis impossible to match and as expected it basically resulted in reliance on the other three characteristics inadvertently giving more weight to genre. Another profile was `{'favorite_genre': 'metal', 'favorite_mood': 'angry', 'target_energy': 1.0, 'likes_acoustic': True}` which shows seeminly contradiciton since high henergy is typically not accoustic. This led to rock songs being recomnded even and the accousticness ends up almost canceled out. Both of these tests show the inherent flaw with the set socring rate for recomendations.
 
 ## 8. Future Work  
 
@@ -98,7 +97,7 @@ Prompts:
 - Improving diversity among the top results  
 - Handling more complex user tastes  
 
----
+The simplicity can be remedied by having user rank the characteristcs by what they want to be prefered most. This way if someone has an extreme preference for accoustics it is less likely to be cancelled out by the other charcteristics. Rankings could also be applied to give multiple chocies for genre or mood to add more nuances to the selection. Adding more songs of both the same and differing genres to what already is present will always be good for a music recomender.
 
 ## 9. Personal Reflection  
 
@@ -108,4 +107,6 @@ Prompts:
 
 - What you learned about recommender systems  
 - Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+- How this changed the way you think about music recommendation apps 
+
+I learend about the complexity in accomedating a very varied medium of music and how to handle nearly infinite user preferences. I don;t really use music recomndation apps but I am now more appreicative of the work that went into making them. 
