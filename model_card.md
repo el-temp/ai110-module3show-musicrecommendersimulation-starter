@@ -5,7 +5,7 @@
 Give your model a short, descriptive name.  
 
 
-Name: MusicMatcher-alpha
+Name: MusicMatcher-Beta
 
 ## 2. Intended Use  
 
